@@ -6,7 +6,7 @@ const scraper = new Scraper();
 const url =
     "https://www.otomoto.pl/ciezarowe/uzytkowe/mercedes-benz/od-2014/q-actros?search%5Bfilter_enum_damaged%5D=0&search%5Border%5D=created_at+%3Adesc";
 const nextBtn = "div.ooa-1oll9pn.e8b33l77 > div > ul > li:last-child";
-const pageCount = 20;
+const pageCount = 0;
 
 
 (async () => {
@@ -33,12 +33,21 @@ const pageCount = 20;
         }
         console.log(`Found ${ads.length} ads on ${pageCount !== 0 ? `${pageCount} pages` : 'initial page'}`);
 
-        // parse data from each ad
-        for (let i = 0;i < ads.length;i++) {
-            const itemHtml = await scraper.getPageContent(ads[i].link);
-            const truck = scrapeTruckItem(itemHtml);
-            console.log(`🚀 ~ truck-${i + 1}:`, truck);
-        }
+    
+
+        // parse data from each ad in sequence, single process
+        // for (let i = 0;i < ads.length;i++) {    
+        //     const itemHtml = await scraper.getPageContent(ads[i].link);
+        //     const truck = scrapeTruckItem(itemHtml);
+        //     console.log(`🚀 ~ truck-${i + 1}:`, truck);
+        // }
+
+        // parse data from each ad using cluster
+        const data = await scraper.cluster({
+            urls: ads.map((ad) => ad.link),
+            dataParser: scrapeTruckItem,
+        })
+        console.log(data, data.length)
 
     } catch (err) {
         console.error(err);
