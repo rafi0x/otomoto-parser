@@ -12,14 +12,19 @@ path ./app.js
 ## Install dependencies
 
 ```bash
-yarn || npm i
+yarn || npm install
 ```
 
 ## Start the app
 
 ```bash
-node app
+yarn start || npm start
 ```
 
-auto retry when error is implemented in Scraper class's methods. default retry limit is 3 and retry interval is 1000ms. you can change these values in Scraper class's constructor.
+-   we have 2 way to scrape data from website, one is cluster and another is single process, default is cluster (can change in app.js).
 
+-   single process have auto retry, but cluster doesn't.
+
+-   default retry limit is 3 and retry interval is 1000ms. you can change these values in Scraper class's constructor.
+
+-   output will be saved in console.
