@@ -8,7 +8,9 @@ path ./app.js
     pageCount = number > 1
 
 ```
-
+- if pageCount == 0 then it will only scrape initial page.
+- if pageCount > 0 and if that much page doesn't exist it will scrape available pages.
+#
 ## Install dependencies
 
 ```bash
@@ -21,7 +23,7 @@ yarn || npm install
 yarn start || npm start
 ```
 
-#
+##
 
 -   we have 2 way to scrape data from website, one is cluster process (faster) and another is single process (slower), default is cluster (can change in app.js).
 
