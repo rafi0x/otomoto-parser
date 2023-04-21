@@ -9,7 +9,7 @@ path ./app.js
 
 ```
 - if pageCount == 0 then it will only scrape initial page.
-- if pageCount > 0 and if that much page doesn't exist it will scrape available pages.
+- if pageCount > 1 and if that much page doesn't exist it will scrape available pages.
 #
 ## Install dependencies
 
